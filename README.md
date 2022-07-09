@@ -38,14 +38,14 @@ In order to test the hello function locally, run the following command:
 
 - `npx sls invoke local -f addProduct --path src/functions/addProduct/mock.json`
 
-# Catalog
+#### Catalog
 
 - `npx sls invoke local -f catalog`
 
-# Get Product
+#### Get Product
 
 - `npx sls invoke local -f getProduct`
 
-# Checkout
+#### Checkout
 
 - `npx sls invoke local -f checkout --path src/functions/checkout/mock.json`
