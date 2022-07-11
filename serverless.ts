@@ -43,6 +43,11 @@ const serverlessConfiguration: AWS = {
           `arn:aws:dynamodb:us-east-1:*:table/${TableNames.PRODUCT}`,
         ],
       },
+      {
+        Effect: "Allow",
+        Action: "sns:*",
+        Resource: "arn:aws:sns:us-east-1:*:sendEmail",
+      },
     ],
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: "1",

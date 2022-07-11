@@ -3,8 +3,11 @@ import { sendMailgun } from "src/services/order.service";
 import { OrderType } from "src/types/Order";
 
 const sendEmail = async (event) => {
+  const order: OrderType = JSON.parse(
+    event.Records[0].Sns.Message
+  ) as OrderType;
+
   try {
-    const order: OrderType = event["order"] as OrderType;
     await sendMailgun(order);
     return;
   } catch (e) {

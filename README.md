@@ -32,7 +32,7 @@
 
 ### Tests
 
-In order to test the hello function locally, run the following command:
+In order to test the functions locally, run the following command:
 
 #### Add Product
 

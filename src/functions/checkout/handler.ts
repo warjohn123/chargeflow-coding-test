@@ -1,27 +1,20 @@
+import { OrderType } from "aws-sdk/clients/outposts";
 import type { ValidatedEventAPIGatewayProxyEvent } from "src/libs/api-gateway";
 import { formatJSONResponse } from "src/libs/api-gateway";
 import { middyfy } from "src/libs/lambda";
-import { Lambda } from "dynamoose/dist/aws/sdk";
+import { publishSNS } from "src/services/email-sns.service";
 import { createOrder } from "src/services/order.service";
 
 import schema from "./schema";
 
-const checkout: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
-  event
-) => {
+export const checkoutHandler: ValidatedEventAPIGatewayProxyEvent<
+  typeof schema
+> = async (event) => {
   try {
-    const response = await createOrder(event.body as any);
-
-    const emailResponse = await new Lambda()
-      .invoke({
-        FunctionName: "coding-test-dev-sendEmail",
-        Payload: JSON.stringify({
-          order: response,
-        }),
-      })
-      .promise();
-
-    console.log("emailResponse", emailResponse);
+    const response: OrderType = (await createOrder(
+      event.body as any
+    )) as OrderType;
+    await publishSNS(response as any);
     return formatJSONResponse({
       data: response,
     });
@@ -33,4 +26,4 @@ const checkout: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 };
 
-export const main = middyfy(checkout);
+export const main = middyfy(checkoutHandler);
