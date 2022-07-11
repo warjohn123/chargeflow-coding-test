@@ -44,8 +44,6 @@ export const sendMailgun = (order: any) => {
     if (!response.length) return;
     const productItem = response[0] as ProductType;
 
-    console.log("productItem", productItem);
-
     const subject = `Order ${id.split("-")[0]} received`;
     const emailBody = `We have received your order ${productItem.name}. Thank you!`;
 

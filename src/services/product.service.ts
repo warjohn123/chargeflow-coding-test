@@ -29,10 +29,8 @@ export function getAProductById(productId: string) {
   return new Promise(async (resolve, reject) => {
     try {
       const response = await Product.query("id").eq(productId).exec();
-      console.log("response", response);
       resolve(response);
     } catch (e) {
-      console.log("error", e);
       reject(e);
     }
   });
