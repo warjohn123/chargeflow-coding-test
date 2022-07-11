@@ -14,8 +14,10 @@ export const checkoutHandler: ValidatedEventAPIGatewayProxyEvent<
   typeof schema
 > = async (event) => {
   try {
+    const payload = JSON.parse(event.body as any) || {};
+
     const response: OrderType = (await createOrder(
-      event.body as any
+      payload as any
     )) as OrderType;
     await publishSNS(response as any);
     return ok({

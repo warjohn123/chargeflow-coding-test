@@ -3,7 +3,7 @@ import { createProduct } from "./handler";
 describe("Add product handler", () => {
   it("should return 200", async () => {
     const response: any = await createProduct(
-      { body: { name: "test", description: "test" } } as any,
+      { body: JSON.stringify({ name: "test", description: "test" }) } as any,
       null,
       null
     );

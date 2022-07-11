@@ -12,7 +12,8 @@ export const createProduct: ValidatedEventAPIGatewayProxyEvent<
   typeof schema
 > = async (event) => {
   try {
-    const response = await addProduct(event.body as any);
+    const payload = JSON.parse(event.body as any) || {};
+    const response = await addProduct(payload as any);
     return ok({
       data: response,
     });

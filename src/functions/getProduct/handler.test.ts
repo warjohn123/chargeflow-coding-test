@@ -5,7 +5,9 @@ describe("Get Product handler", () => {
   it("should return 200", async () => {
     const productName = "Espresso Machine";
     const productResponse: any = await createProduct(
-      { body: { name: productName, description: "lorem ipsum" } } as any,
+      {
+        body: JSON.stringify({ name: productName, description: "lorem ipsum" }),
+      } as any,
       null,
       null
     );
