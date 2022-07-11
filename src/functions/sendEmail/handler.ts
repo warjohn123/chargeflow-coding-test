@@ -11,7 +11,6 @@ const sendEmail = async (event) => {
     await sendMailgun(order);
     return;
   } catch (e) {
-    console.log("e", e);
     throw e;
   }
 };

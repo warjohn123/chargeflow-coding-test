@@ -1,6 +1,9 @@
 import { OrderType } from "aws-sdk/clients/outposts";
-import type { ValidatedEventAPIGatewayProxyEvent } from "src/libs/api-gateway";
-import { formatJSONResponse } from "src/libs/api-gateway";
+import {
+  serverError,
+  ValidatedEventAPIGatewayProxyEvent,
+} from "src/libs/api-gateway";
+import { ok } from "src/libs/api-gateway";
 import { middyfy } from "src/libs/lambda";
 import { publishSNS } from "src/services/email-sns.service";
 import { createOrder } from "src/services/order.service";
@@ -15,14 +18,11 @@ export const checkoutHandler: ValidatedEventAPIGatewayProxyEvent<
       event.body as any
     )) as OrderType;
     await publishSNS(response as any);
-    return formatJSONResponse({
+    return ok({
       data: response,
     });
   } catch (e) {
-    console.log("error", e);
-    return formatJSONResponse({
-      data: e,
-    });
+    return serverError(e);
   }
 };
 

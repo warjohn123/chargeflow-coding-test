@@ -1,5 +1,8 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from "src/libs/api-gateway";
-import { formatJSONResponse } from "../../libs/api-gateway";
+import {
+  serverError,
+  ValidatedEventAPIGatewayProxyEvent,
+} from "src/libs/api-gateway";
+import { ok } from "../../libs/api-gateway";
 import { middyfy } from "../../libs/lambda";
 import { addProduct } from "../../services/product.service";
 
@@ -10,13 +13,11 @@ export const createProduct: ValidatedEventAPIGatewayProxyEvent<
 > = async (event) => {
   try {
     const response = await addProduct(event.body as any);
-    return formatJSONResponse({
+    return ok({
       data: response,
     });
   } catch (e) {
-    return formatJSONResponse({
-      data: e,
-    });
+    return serverError(e);
   }
 };
 
