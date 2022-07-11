@@ -30,7 +30,7 @@
   "product": "THIS IS A PRODUCT ID"
   }
 
-### Tests
+### Local Tests
 
 In order to test the functions locally, run the following command:
 
@@ -49,3 +49,11 @@ In order to test the functions locally, run the following command:
 #### Checkout
 
 - `npx sls invoke local -f checkout --path src/functions/checkout/mock.json`
+
+### Unit Tests
+
+- `npm run test`
+
+### Unit Test Coverage
+
+- `npm run test-coverage`

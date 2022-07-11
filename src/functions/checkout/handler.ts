@@ -1,12 +1,12 @@
-import { OrderType } from "aws-sdk/clients/outposts";
 import {
   serverError,
   ValidatedEventAPIGatewayProxyEvent,
-} from "src/libs/api-gateway";
-import { ok } from "src/libs/api-gateway";
-import { middyfy } from "src/libs/lambda";
-import { publishSNS } from "src/services/email-sns.service";
-import { createOrder } from "src/services/order.service";
+  ok,
+} from "@libs/api-gateway";
+import { middyfy } from "@libs/lambda";
+import { publishSNS } from "@services/email-sns.service";
+import { createOrder } from "@services/order.service";
+import { OrderType } from "src/types/Order";
 
 import schema from "./schema";
 

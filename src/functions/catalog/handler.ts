@@ -1,12 +1,12 @@
 import {
   serverError,
   ValidatedEventAPIGatewayProxyEvent,
-} from "src/libs/api-gateway";
-import { ok } from "src/libs/api-gateway";
-import { middyfy } from "src/libs/lambda";
-import { getAllProducts } from "src/services/product.service";
+  ok,
+} from "@libs/api-gateway";
+import { middyfy } from "@libs/lambda";
+import { getAllProducts } from "@services/product.service";
 
-const catalog: ValidatedEventAPIGatewayProxyEvent<{}> = async () => {
+export const catalog: ValidatedEventAPIGatewayProxyEvent<{}> = async () => {
   try {
     const response = await getAllProducts();
     return ok({

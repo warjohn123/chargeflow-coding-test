@@ -1,5 +1,5 @@
 import { Schema } from "dynamoose";
-import Product from "src/model/product.model";
+import Product from "@model/product.model";
 
 const orderSchema = new Schema({
   id: String,

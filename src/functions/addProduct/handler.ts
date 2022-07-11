@@ -1,10 +1,10 @@
 import {
+  ok,
   serverError,
   ValidatedEventAPIGatewayProxyEvent,
-} from "src/libs/api-gateway";
-import { ok } from "../../libs/api-gateway";
-import { middyfy } from "../../libs/lambda";
-import { addProduct } from "../../services/product.service";
+} from "@libs/api-gateway";
+import { middyfy } from "@libs/lambda";
+import { addProduct } from "@services/product.service";
 
 import schema from "./schema";
 

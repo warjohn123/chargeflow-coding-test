@@ -5,7 +5,7 @@ import catalog from "@functions/catalog";
 import getProduct from "@functions/getProduct";
 import checkout from "@functions/checkout";
 import sendEmail from "@functions/sendEmail";
-import { TableNames } from "src/enums";
+import { REGION_NAME, TableNames } from "src/enums";
 
 const serverlessConfiguration: AWS = {
   org: "warren1230",
@@ -25,8 +25,7 @@ const serverlessConfiguration: AWS = {
       {
         Effect: "Allow",
         Action: ["lambda:InvokeFunction", "lambda:InvokeAsync"],
-        Resource:
-          "arn:aws:lambda:us-east-1:*:function:coding-test-dev-sendEmail",
+        Resource: `arn:aws:lambda:${REGION_NAME}:*:function:coding-test-dev-sendEmail`,
       },
       {
         Effect: "Allow",
@@ -39,14 +38,14 @@ const serverlessConfiguration: AWS = {
           "dynamodb:CreateTable",
         ],
         Resource: [
-          `arn:aws:dynamodb:us-east-1:*:table/${TableNames.ORDER}`,
-          `arn:aws:dynamodb:us-east-1:*:table/${TableNames.PRODUCT}`,
+          `arn:aws:dynamodb:${REGION_NAME}:*:table/${TableNames.ORDER}`,
+          `arn:aws:dynamodb:${REGION_NAME}:*:table/${TableNames.PRODUCT}`,
         ],
       },
       {
         Effect: "Allow",
         Action: "sns:*",
-        Resource: "arn:aws:sns:us-east-1:*:sendEmail",
+        Resource: `arn:aws:sns:${REGION_NAME}:*:sendEmail`,
       },
     ],
     environment: {
